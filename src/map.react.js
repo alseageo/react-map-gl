@@ -136,6 +136,11 @@ const PROP_TYPES = {
   clickRadius: PropTypes.number,
 
   /**
+    * Called when the map is clicked on. Returns latitude and longitude
+    */
+  onClick: PropTypes.func,
+
+  /**
     * Passed to Mapbox Map constructor which passes it to the canvas context.
     * This is unseful when you want to export the canvas as a PNG.
     */
@@ -591,20 +596,23 @@ export default class MapGL extends Component {
       startPitch: null
     });
 
-    if (!this.props.onClickFeatures) {
-      return;
-    }
-
     const pos = opt.pos;
 
-    // Radius enables point features, like marker symbols, to be clicked.
-    const size = this.props.clickRadius;
-    const bbox = [[pos.x - size, pos.y - size], [pos.x + size, pos.y + size]];
-    const features = map.queryRenderedFeatures(bbox, this._queryParams);
-    if (!features.length && this.props.ignoreEmptyFeatures) {
-      return;
+    if (this.props.onClick) {
+      const lngLat = unprojectFromTransform(map.transform, pos);
+      this.props.onClick(lngLat);
     }
-    this.props.onClickFeatures(features);
+
+    if (this.props.onClickFeatures) {
+      // Radius enables point features, like marker symbols, to be clicked.
+      const size = this.props.clickRadius;
+      const bbox = [[pos.x - size, pos.y - size], [pos.x + size, pos.y + size]];
+      const features = map.queryRenderedFeatures(bbox, this._queryParams);
+      if (!features.length && this.props.ignoreEmptyFeatures) {
+        return;
+      }
+      this.props.onClickFeatures(features);
+    }
   }
 
   @autobind _onZoom({pos, scale}) {
