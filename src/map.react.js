@@ -119,6 +119,11 @@ const PROP_TYPES = {
   attributionControl: PropTypes.bool,
 
   /**
+    * Called when the map is clicked on. Returns latitude and longitude.
+    */
+  onClick: PropTypes.func,
+
+  /**
     * Called when a feature is clicked on. Uses Mapbox's
     * queryRenderedFeatures API to find features under the pointer:
     * https://www.mapbox.com/mapbox-gl-js/api/#Map#queryRenderedFeatures
@@ -597,21 +602,24 @@ export default class MapGL extends Component {
   }
 
   @autobind _onMouseClick(opt) {
-    if (!this.props.onClickFeatures) {
-      return;
-    }
-
     const map = this._getMap();
     const pos = opt.pos;
 
-    // Radius enables point features, like marker symbols, to be clicked.
-    const size = this.props.clickRadius;
-    const bbox = [[pos.x - size, pos.y - size], [pos.x + size, pos.y + size]];
-    const features = map.queryRenderedFeatures(bbox, this._queryParams);
-    if (!features.length && this.props.ignoreEmptyFeatures) {
-      return;
+    if (this.props.onClick) {
+      const lngLat = unprojectFromTransform(map.transform, pos);
+      this.props.onClick(lngLat);
     }
-    this.props.onClickFeatures(features);
+
+    if (this.props.onClickFeatures) {
+      // Radius enables point features, like marker symbols, to be clicked.
+      const size = this.props.clickRadius;
+      const bbox = [[pos.x - size, pos.y - size], [pos.x + size, pos.y + size]];
+      const features = map.queryRenderedFeatures(bbox, this._queryParams);
+      if (!features.length && this.props.ignoreEmptyFeatures) {
+        return;
+      }
+      this.props.onClickFeatures(features);
+    }
   }
 
   @autobind _onZoom({pos, scale}) {
