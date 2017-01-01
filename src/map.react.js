@@ -605,8 +605,9 @@ export default class MapGL extends Component {
     const map = this._getMap();
     const pos = opt.pos;
 
+    const lngLat = unprojectFromTransform(map.transform, pos);
+
     if (this.props.onClick) {
-      const lngLat = unprojectFromTransform(map.transform, pos);
       this.props.onClick(lngLat);
     }
 
@@ -618,7 +619,7 @@ export default class MapGL extends Component {
       if (!features.length && this.props.ignoreEmptyFeatures) {
         return;
       }
-      this.props.onClickFeatures(features);
+      this.props.onClickFeatures(features, lngLat);
     }
   }
 
