@@ -65,10 +65,10 @@ var SVGOverlay = function (_Component) {
   _createClass(SVGOverlay, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var width = _props.width;
-      var height = _props.height;
-      var isDragging = _props.isDragging;
+      var _props = this.props,
+          width = _props.width,
+          height = _props.height,
+          isDragging = _props.isDragging;
 
       var style = _extends({
         pointerEvents: 'none',
@@ -77,8 +77,8 @@ var SVGOverlay = function (_Component) {
         top: 0
       }, this.props.style);
       var mercator = (0, _viewportMercatorProject2.default)(this.props);
-      var project = mercator.project;
-      var unproject = mercator.unproject;
+      var project = mercator.project,
+          unproject = mercator.unproject;
 
 
       return _react2.default.createElement(

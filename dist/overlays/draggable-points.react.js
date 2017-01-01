@@ -186,12 +186,12 @@ var DraggablePointsOverlay = (_class = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props;
-      var points = _props.points;
-      var width = _props.width;
-      var height = _props.height;
-      var isDragging = _props.isDragging;
-      var style = _props.style;
+      var _props = this.props,
+          points = _props.points,
+          width = _props.width,
+          height = _props.height,
+          isDragging = _props.isDragging,
+          style = _props.style;
 
       var mercator = (0, _viewportMercatorProject2.default)(this.props);
       return _react2.default.createElement(

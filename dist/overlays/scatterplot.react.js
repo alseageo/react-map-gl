@@ -112,16 +112,16 @@ var ScatterplotOverlay = function (_Component) {
   }, {
     key: '_redraw',
     value: function _redraw() {
-      var _props = this.props;
-      var width = _props.width;
-      var height = _props.height;
-      var dotRadius = _props.dotRadius;
-      var dotFill = _props.dotFill;
-      var compositeOperation = _props.compositeOperation;
-      var renderWhileDragging = _props.renderWhileDragging;
-      var isDragging = _props.isDragging;
-      var locations = _props.locations;
-      var lngLatAccessor = _props.lngLatAccessor;
+      var _props = this.props,
+          width = _props.width,
+          height = _props.height,
+          dotRadius = _props.dotRadius,
+          dotFill = _props.dotFill,
+          compositeOperation = _props.compositeOperation,
+          renderWhileDragging = _props.renderWhileDragging,
+          isDragging = _props.isDragging,
+          locations = _props.locations,
+          lngLatAccessor = _props.lngLatAccessor;
 
 
       var mercator = (0, _viewportMercatorProject2.default)(this.props);
@@ -175,10 +175,10 @@ var ScatterplotOverlay = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props;
-      var width = _props2.width;
-      var height = _props2.height;
-      var globalOpacity = _props2.globalOpacity;
+      var _props2 = this.props,
+          width = _props2.width,
+          height = _props2.height,
+          globalOpacity = _props2.globalOpacity;
 
       var pixelRatio = _window2.default.devicePixelRatio || 1;
       return _react2.default.createElement('canvas', {
