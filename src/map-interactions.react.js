@@ -20,7 +20,7 @@
 
 import React, {PropTypes, Component} from 'react';
 import autobind from 'autobind-decorator';
-import {Point} from 'mapbox-gl';
+import {Point} from 'mapbox-gl/dist/mapbox-gl.js';
 import document from 'global/document';
 import window from 'global/window';
 
