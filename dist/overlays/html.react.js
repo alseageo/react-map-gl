@@ -60,11 +60,11 @@ var HTMLOverlay = function (_Component) {
   _createClass(HTMLOverlay, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var width = _props.width;
-      var height = _props.height;
-      var project = _props.project;
-      var isDragging = _props.isDragging;
+      var _props = this.props,
+          width = _props.width,
+          height = _props.height,
+          project = _props.project,
+          isDragging = _props.isDragging;
 
       var style = _extends({
         position: 'absolute',
